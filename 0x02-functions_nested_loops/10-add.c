@@ -1,15 +1,13 @@
-#include "main.h" 
-  
- /** 
-  * _isalpha - a function that checks for alphabetic character. 
-  * @c: An input character 
-  * Return: 1 if c is a letter, lowercase or uppercase, 
-  * 0 if otherwise 
-  */ 
- int _isalpha(int c) 
- { 
-         if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) 
-                 return (1); 
-         else 
-                 return (0); 
- }
+#include "main.h"
+
+/**
+ * add - Adds two integers.
+ * @n1: The first integer to be added.
+ * @n2: The second integer to be added.
+ *
+ * Return: The result of the addition.
+ */
+int add(int n1, int n2)
+{
+	return (n1 + n2);
+}
