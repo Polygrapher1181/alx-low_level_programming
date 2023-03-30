@@ -1,23 +1,24 @@
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+#include "lists.h"
 
-typedef struct list_s {
-    char *str;
-    struct list_s *next;
-} list_t;
+/**
+ * print_list - prints all the elements of a linked list
+ * @h: pointer to the list_t list to print
+ *
+ * Return: the number of nodes printed
+ */
+size_t print_list(const list_t *h)
+{
+	size_t s = 0;
 
-list_t *add_node(list_t **head, const char *str) {
-    list_t *new_node = malloc(sizeof(list_t));
-    if (!new_node) {
-        return NULL; // Memory allocation failed
-    }
-    new_node->str = strdup(str);
-    if (!new_node->str) {
-        free(new_node); // Memory allocation failed
-        return NULL;
-    }
-    new_node->next = *head;
-    *head = new_node;
-    return new_node;
+	while (h)
+	{
+		if (!h->str)
+			printf("[0] (nil)\n");
+		else
+			printf("[%u] %s\n", h->len, h->str);
+		h = h->next;
+		s++;
+	}
+	return (s);
 }
-
