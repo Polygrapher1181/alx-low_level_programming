@@ -1,28 +1,22 @@
 #include "main.h"
 
 /**
- * get_bit - returns the value of a bit at a given index
+ * flip_bits - Counts the number of bits needed to be
+ *             flipped to get from one number to another.
+ * @n: The number.
+ * @m: The number to flip n to.
  *
- * @n: the number containing the bit to be returned
- * @index: the index of the bit to be returned
- *
- * Return: the value of the bit at the given index, or -1 if an error occurs
+ * Return: The necessary number of bits to flip to get from n to m.
  */
-int get_bit(unsigned long int n, unsigned int index)
+unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned long int mask = 1;
+	unsigned long int xor = n ^ m, bits = 0;
 
-	if (index >= sizeof(unsigned long int) * 8)
+	while (xor > 0)
 	{
-		return (-1);
+		bits += (xor & 1);
+		xor >>= 1;
 	}
 
-	mask <<= index;
-
-	if (n & mask)
-	{
-		return (1);
-	}
-
-	return (0);
+	return (bits);
 }
