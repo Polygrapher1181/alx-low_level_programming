@@ -1,39 +1,49 @@
 #include "main.h"
-#include <stdlib.h>
 
-/**
- * read_textfile - Reads a text file and prints it to POSIX stdout.
- * @filename: A pointer to the name of the file.
- * @letters: The number of letters the function should read and print.
+/***
+ * read_textfile - read a text file
+ * @filename: char string
+ * @letters: number of letters
  *
- * Return: If the function fails or filename is NULL - 0.
- *         Otherwise, the actual number of bytes the function can read and print.
+ * return: number of letters or 0
  */
-size_t read_textfile(const char *filename, size_t letters)
+
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-	size_t file_descriptor, bytes_read, bytes_written;
+	int mak;
+	ssize_t count1, count2;
 	char *buffer;
 
-	if (filename == NULL)
+	if (!filename)
+		return (0);
+
+	mak = open(filename, O_RDONLY);
+	if (mak == -1)
 		return (0);
 
 	buffer = malloc(sizeof(char) * letters);
-	if (buffer == NULL)
+	if (!buffer)
 		return (0);
 
-	file_descriptor = open(filename, O_RDONLY);
-	bytes_read = read(file_descriptor, buffer, letters);
-	bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
-
-	if (file_descriptor == -1 || bytes_read == -1 ||
-	    bytes_written == -1 || bytes_written != bytes_read)
+	count1 = read(mak, buffer, letters);
+	if (count1 == -1)
 	{
 		free(buffer);
+		close(mak);
+		return (0);
+	}
+
+	count2 = write(STDOUT_FILENO, buffer, count1);
+
+	if (count2 == -1 || count1 != count2)
+	{
+		free(buffer);
+		close(mak);
 		return (0);
 	}
 
 	free(buffer);
-	close(file_descriptor);
+	close(mak);
 
-	return (bytes_written);
+	return (count2);
 }
