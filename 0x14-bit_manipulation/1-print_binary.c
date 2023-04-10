@@ -19,16 +19,16 @@ void print_binary(unsigned long int n)
 
 		if (bitNo)
 		{
-			printf('1');
+			_putchar('1');
 			keepCount++;
 		}
 		else if (keepCount > 0)
 		{
-			printf('0');
+			_putchar('0');
 		}
 	}
 	if (keepCount == 0)
 	{
-		printf('0');
+		_putchar('0');
 	}
 }
