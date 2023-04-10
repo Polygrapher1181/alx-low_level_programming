@@ -1,23 +1,28 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
- * flip_bits - function to calculate the number of bits needed to flip to convert one number to another
- * @n: first number
- * @m: second number
+ * get_bit - returns the value of a bit at a given index
  *
- * Return: the number of bits needed to flip
+ * @n: the number containing the bit to be returned
+ * @index: the index of the bit to be returned
+ *
+ * Return: the value of the bit at the given index, or -1 if an error occurs
  */
-unsigned int flip_bits(unsigned long int n, unsigned long int m)
+int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned long int diff = n ^ m;
-	unsigned int count = 0;
+	unsigned long int mask = 1;
 
-	while (diff != 0)
+	if (index >= sizeof(unsigned long int) * 8)
 	{
-		count++;
-		diff &= (diff - 1);
+		return (-1);
 	}
 
-	return (count);
+	mask <<= index;
+
+	if (n & mask)
+	{
+		return (1);
+	}
+
+	return (0);
 }
