@@ -8,16 +8,16 @@
  */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-	unsigned int count = 0;
+	unsigned int keepCount = 0;
 
-	int p;
+	int i;
 
 	unsigned long  int  theDiff = n ^ m;
 
-	for (p = 0; p < 64; p++)
+	for (i = 0; i < 64; i++)
 	{
-		count += (theDiff >> p) & 1;
+		keepCount += (theDiff >> i) & 1;
 	}
 
-	return (count);
+	return (keepCount);
 }
