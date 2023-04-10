@@ -1,23 +1,23 @@
 #include "main.h"
-
 /**
- * get_endianness - checks the endianness of the system
+ *flip_bits - function to flip bits
+ *@n:argument
+ *@m:argument
+ *Return:the count
  *
- * Return: 0 if big endian, 1 if little endian
  */
-int get_endianness(void)
+unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-    int num = 1;
-    char *ptr = (char *)&num;
+	unsigned int count = 0;
 
-    if (*ptr == 1)
-    {
-        /* Little endian */
-        return (1);
-    }
-    else
-    {
-        /* Big endian */
-        return (0);
-    }
+	int p;
+
+	unsigned long  int  theDiff = n ^ m;
+
+	for (p = 0; p < 64; p++)
+	{
+		count += (theDiff >> p) & 1;
+	}
+
+	return (count);
 }
